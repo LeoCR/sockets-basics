@@ -1,0 +1,22 @@
+{
+  "name": "sockets_chat",
+  "version": "1.0.0",
+  "description": "Chat with Sockets",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm run test",
+    "start":"node server.js"
+  },
+  "keywords": [
+    "socket.io",
+    "nodejs"
+  ],
+  "author": "laranibarsanchez@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "10.x"
+  }
+}
