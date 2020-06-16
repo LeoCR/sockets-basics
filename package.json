@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "npm run test",
-    "start": "nodemon ./server.js"
+    "start": "node ./server.js"
   },
   "keywords": [
     "socket.io",
@@ -14,8 +14,7 @@
   "author": "laranibarsanchez@gmail.com",
   "license": "ISC",
   "devDependencies": {
-    "express": "^4.17.1",
-    "nodemon": "^2.0.4"
+    "express": "^4.17.1"
   },
   "engines": {
     "node": "12.13.x"
