@@ -8,7 +8,29 @@ var moment = require('moment');
 app.use(express.static(__dirname+'/public'));
 
 var clientInfo={};
+/**
+ * Sends current users to provided socket
+ */
+function sendCurrentUsers(socket){
+    var info=clientInfo[socket.id];
+    var users=[];
 
+    if(typeof info ==='undefined'){
+        return;
+    }
+    Object.keys(clientInfo).forEach(function(socketId){
+        var userInfo= clientInfo[socketId];
+
+        if(info.room===userInfo.room){
+            users.push(userInfo.name)
+        }
+    });
+    socket.emit('message',{
+        name:'System',
+        text:'Current users: '+ users.join(', '),
+        timestamp:moment().local().format('MMM Do YYYY h:mm a')
+    })
+}
 io.on('connection',function(socket){
     console.log('User Connected via socket.io');
     socket.on('disconnect',function(){
@@ -18,7 +40,7 @@ io.on('connection',function(socket){
             io.to(userData.room).emit('message',{
                 name:'System',
                 text:userData.name+ ' has left!',
-                timestamp:moment().local().format('MMM Do YYYY h:mm a')
+                time:moment().local().format('MMM Do YYYY h:mm a')
             }) 
             delete clientInfo[socket.id];      
         }
@@ -47,19 +69,24 @@ io.on('connection',function(socket){
         socket.broadcast.to(req.room).emit('message',{
             name:'System',
             text:req.name+ ' has joined!',
-            timestamp:moment().local().format('MMM Do YYYY h:mm a')
+            time:moment().local().format('MMM Do YYYY h:mm a')
         })
     })
 
     socket.on('message',function(message){
         console.log('Message reveived: '+message.text);
 
-        message.time=moment().local().format('MMM Do YYYY h:mm a')
-        //socket.broadcast.emit('message',message);
-        /**
-         * Only emits the message to people who are in the same room
-         */
-        io.to(clientInfo[socket.id].room).emit('message',message);
+        if(message.text==='@currentUsers'){
+            sendCurrentUsers(socket);
+        }
+        else{
+            message.time=moment().local().format('MMM Do YYYY h:mm a')
+            //socket.broadcast.emit('message',message);
+            /**
+             * Only emits the message to people who are in the same room
+             */
+            io.to(clientInfo[socket.id].room).emit('message',message);
+        }
     });
     //timestamp property = Javascript timestamp (miliseconds)
     socket.emit('message',{
