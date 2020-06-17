@@ -28,7 +28,7 @@ function sendCurrentUsers(socket){
     socket.emit('message',{
         name:'System',
         text:'Current users: '+ users.join(', '),
-        timestamp:moment().local().format('MMM Do YYYY h:mm a')
+        time:moment().local().format('MMM Do YYYY h:mm a')
     })
 }
 io.on('connection',function(socket){
@@ -75,7 +75,9 @@ io.on('connection',function(socket){
 
     socket.on('message',function(message){
         console.log('Message reveived: '+message.text);
-
+        /**
+         * Intercepting user message
+         */
         if(message.text==='@currentUsers'){
             sendCurrentUsers(socket);
         }
