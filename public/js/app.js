@@ -7,7 +7,11 @@ console.log(name+' wants to join '+room);
 
 socket.on('connect',function(){
     console.log('Connected to socket.io server');
-    
+    jQuery('.room-title').text('Room Name: '+room)    
+    socket.emit('joinRoom',{
+        name:name,
+        room:room
+    })
 })
 socket.on('message',function(message){
     var $message=jQuery('.messages');
