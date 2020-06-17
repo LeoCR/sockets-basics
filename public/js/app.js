@@ -6,9 +6,18 @@ console.log(name+' wants to join '+room);
 
 
 socket.on('connect',function(){
+    /**
+     * This callback is gets fired when the client 
+     * successfully connects to the server
+     */
     console.log('Connected to socket.io server');
     jQuery('.room-title').text('Room Name: '+room)    
     socket.emit('joinRoom',{
+        /**
+         * Call a new event that we are going to create
+         * in the server.We are going to send across the name of the person
+         * and the room they want to Join
+         **/
         name:name,
         room:room
     })
