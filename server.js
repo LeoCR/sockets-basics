@@ -19,6 +19,7 @@ io.on('connection',function(socket){
     });
     //timestamp property = Javascript timestamp (miliseconds)
     socket.emit('message',{
+        name:'System',
         text:'Welcome to the web chat application',
         time:moment().local().format('MMM Do YYYY h:mm a')
     })
