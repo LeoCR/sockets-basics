@@ -10,11 +10,15 @@
     <script src="/js/QueryParams.js"></script>
     </head>
 <body>
-     <h1>Join Chat</h1>
-     <form action="/chat.html">
-         <label for="name">Display Name</label>
-         <input type="text" id="name" name="name" value="Anonymous"/>
-        <input type="submit" value="Join Chat"/>
+    <a href="/">Change Settings</a>
+    <div class="messages">
+        <!--Messages end up here! -->
+
+    </div>
+    <form id="message-form">
+        <input type="text" name="message" id="message"/>
+        <input type="submit" value="Submit">
     </form>
+    <script src="./js/app.js" data-defer="defer" type="text/javascript"></script>
 </body>
 </html>
