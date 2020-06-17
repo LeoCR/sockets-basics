@@ -8,17 +8,20 @@
     <script src="/js/socket.io-2.3.0.js"></script>
     <script src="/js/moment.js"></script>
     <script src="/js/QueryParams.js"></script>
-    </head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+</head>
 <body>
-    <a href="/">Change Settings</a>
+    <a href="/" class="btn btn-warning">Change Settings</a>
     <h1 class="room-title"></h1>
     <div class="messages">
         <!--Messages end up here! -->
 
     </div>
     <form id="message-form">
-        <input type="text" name="message" id="message"/>
-        <input type="submit" value="Submit">
+        <div class="form-group">
+            <input type="text" class="form-control" name="message" id="message"/>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-danger"/>
     </form>
     <script src="./js/app.js" data-defer="defer" type="text/javascript"></script>
 </body>
